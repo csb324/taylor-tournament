@@ -6,7 +6,8 @@ const config = require('./webpack.config.dev');
 const app = express();
 const compiler = webpack(config);
 
-const api = require('./src/database/routes');
+const models = require('./server/models');
+const api = require('./server/routes');
 
 app.use('/api', api);
 
@@ -21,11 +22,13 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(3000, 'localhost', (err) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
+models.sequelize.sync().then(function() {
+	app.listen(3000, 'localhost', (err) => {
+	  if (err) {
+	    console.log(err);
+	    return;
+	  }
 
-  console.log('Listening at http://localhost:3000');
-});
+	  console.log('Listening at http://localhost:3000');
+	});
+})
