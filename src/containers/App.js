@@ -2,8 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CounterActions from '../actions/CounterActions';
+import * as SongsActions from '../actions/SongsActions';
+
 import Counter from '../components/Counter';
 import Footer from '../components/Footer';
+import Songs from '../components/Songs';
 
 /**
  * It is common practice to have a 'Root' container/component require our main App (this one).
@@ -13,12 +16,13 @@ import Footer from '../components/Footer';
 export class App extends Component {
   render() {
     // we can use ES6's object destructuring to effectively 'unpack' our props
-    const { counter, actions } = this.props;
+    const { counter, counterActions, songs, songsActions } = this.props;
     return (
       <div className="main-app-container">
         <div className="main-app-nav">Simple Redux Boilerplate</div>
         {/* notice that we then pass those unpacked props into the Counter component */}
-        <Counter counter={counter} actions={actions} />
+        <Counter counter={counter} actions={counterActions} />
+        <Songs songs={songs} actions={songsActions}/>
         <Footer />
       </div>
     );
@@ -27,7 +31,9 @@ export class App extends Component {
 
 App.propTypes = {
   counter: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired
+  counterActions: PropTypes.object.isRequired,
+  songs: PropTypes.object.isRequired,
+  songsActions: PropTypes.object.isRequired
 };
 
 /**
@@ -37,7 +43,8 @@ App.propTypes = {
  */
 function mapStateToProps(state) {
   return {
-    counter: state.counter
+    counter: state.counter,
+    songs: state.songs
   };
 }
 
@@ -51,7 +58,8 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(CounterActions, dispatch)
+    counterActions: bindActionCreators(CounterActions, dispatch),
+    songsActions: bindActionCreators(SongsActions, dispatch)
   };
 }
 

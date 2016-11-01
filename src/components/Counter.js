@@ -13,6 +13,10 @@ export default class Counter extends Component {
     this.props.actions.decrement();
   }
 
+  handleRequest() {
+    this.props.actions.setToSongCount();
+  }
+
   render() {
     return (
       <div className="counter-container">
@@ -25,6 +29,9 @@ export default class Counter extends Component {
         <div className="counter-buttons">
           <button onClick={() => {this.handleDecrement();}}>-</button>
           <button onClick={() => {this.handleIncrement();}}>+</button>
+          
+          <button onClick={() => {this.handleRequest();}}>etc</button>
+          
         </div>
       </div>
     );

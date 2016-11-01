@@ -1,3 +1,5 @@
+require('babel-register');
+
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
@@ -7,7 +9,7 @@ const app = express();
 const compiler = webpack(config);
 
 const models = require('./server/models');
-const api = require('./server/routes');
+const api = require('./server/routes').default;
 
 app.use('/api', api);
 

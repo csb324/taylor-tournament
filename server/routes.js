@@ -1,17 +1,20 @@
-var express = require('express');
-var router = express.Router();
+// var express = require('express');
+// var router = express.Router();
 
-// var db = require('./queries');
+import express from 'express';
+import models from './models';
+import songController from './controllers/songController';
 
-var models = require('./models')
+const router = express.Router();
 
-var songController = require('./controllers/songController');
 
-router.get('/songs', songController.getAll);
+
+router.get('/songs', songController.index);
+router.get('/songs/:id', songController.show);
 // router.get('/songs/:id', db.getSingleSong);
 // router.post('/songs', db.createSong);
 // router.put('/songs/:id', db.updateSong);
 // router.delete('/songs/:id', db.removeSong);
 
 
-module.exports = router;
+export default router;

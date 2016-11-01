@@ -1,4 +1,4 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../constants/ActionTypes';
+import { INCREMENT_COUNTER, DECREMENT_COUNTER, SET_COUNTER } from '../constants/ActionTypes';
 
 export function increment() {
   return {
@@ -9,6 +9,13 @@ export function increment() {
 export function decrement() {
   return {
     type: DECREMENT_COUNTER
+  };
+}
+
+export function setTo(value) {
+  return {
+    type: SET_COUNTER,
+    data: value
   };
 }
 
@@ -30,4 +37,19 @@ export function incrementAsync() {
       dispatch(increment());
     }, 1000);
   };
+}
+
+export function setToSongCount() {
+  return (dispatch) => {
+
+    const url = "/api/songs";
+
+    fetch(url).then(function(response) { 
+      return response.json()
+    }).then((value) => {
+      console.log(value);
+      dispatch(setTo(value.data.length));
+    });
+
+  }
 }
