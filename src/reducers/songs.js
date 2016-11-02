@@ -2,7 +2,7 @@ import { GET_SONGS } from '../constants/ActionTypes';
 
 const initialState = {};
 
-export default function counter(state = initialState, action) {
+export default function songs(state = initialState, action) {
   switch (action.type) {
   case GET_SONGS:
     console.log(state);

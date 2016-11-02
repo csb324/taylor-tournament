@@ -53,3 +53,19 @@ export function setToSongCount() {
 
   }
 }
+
+
+export function createGame() {
+  return (dispatch) => {
+    const url = "/api/games";
+
+    fetch(url, {
+      method: 'POST'
+    }).then(function(response) {
+      return response.json();
+    }).then((response) => {
+      console.log(response);
+      dispatch(increment());     
+    });
+  }
+}

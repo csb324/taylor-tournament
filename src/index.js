@@ -13,9 +13,16 @@ import './styles/main.scss';
 import { configureStore } from './store/configureStore';
 import { Root } from './containers/Root';
 
+// history
+import { browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
+
+
+
 const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
-  <Root store={store} />,
+  <Root store={store} history={history} />,
   document.getElementById('root')
 );

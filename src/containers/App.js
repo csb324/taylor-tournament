@@ -16,13 +16,12 @@ import Songs from '../components/Songs';
 export class App extends Component {
   render() {
     // we can use ES6's object destructuring to effectively 'unpack' our props
-    const { counter, counterActions, songs, songsActions } = this.props;
+    const { children } = this.props;
     return (
       <div className="main-app-container">
         <div className="main-app-nav">Simple Redux Boilerplate</div>
         {/* notice that we then pass those unpacked props into the Counter component */}
-        <Counter counter={counter} actions={counterActions} />
-        <Songs songs={songs} actions={songsActions}/>
+        {children}
         <Footer />
       </div>
     );
@@ -30,10 +29,11 @@ export class App extends Component {
 }
 
 App.propTypes = {
-  counter: PropTypes.number.isRequired,
-  counterActions: PropTypes.object.isRequired,
-  songs: PropTypes.object.isRequired,
-  songsActions: PropTypes.object.isRequired
+  // counter: PropTypes.number.isRequired,
+  // counterActions: PropTypes.object.isRequired,
+  // songs: PropTypes.object.isRequired,
+  // songsActions: PropTypes.object.isRequired,
+  children: PropTypes.node
 };
 
 /**
@@ -41,7 +41,9 @@ App.propTypes = {
  * state in this Redux application. 'counter' is a property within our store/state
  * object. By mapping it to props, we can pass it to the child component Counter.
  */
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  console.log(ownProps);
+
   return {
     counter: state.counter,
     songs: state.songs

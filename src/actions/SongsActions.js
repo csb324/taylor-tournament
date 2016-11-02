@@ -1,44 +1,17 @@
 import { GET_SONGS } from '../constants/ActionTypes';
+import { Schema, arrayOf, normalize } from 'normalizr';
 
-export function returnSongs(songs) {
+
+const songSchema = new Schema('songs');
+
+
+
+export function returnSongs(response) {
   return {
     type: GET_SONGS,
-    data: songs
+    response
   };
 }
-
-// export function decrement() {
-//   return {
-//     type: DECREMENT_COUNTER
-//   };
-// }
-
-// export function setTo(value) {
-//   return {
-//     type: SET_COUNTER,
-//     data: value
-//   };
-// }
-
-// export function incrementIfOdd() {
-//   return (dispatch, getState) => {
-//     const { counter } = getState();
-
-//     if (counter % 2 === 0) {
-//       return;
-//     }
-
-//     dispatch(increment());
-//   };
-// }
-
-// export function incrementAsync() {
-//   return dispatch => {
-//     setTimeout(() => {
-//       dispatch(increment());
-//     }, 1000);
-//   };
-// }
 
 export function getSongs() {
   return (dispatch) => {
@@ -48,8 +21,10 @@ export function getSongs() {
     fetch(url).then(function(response) { 
       return response.json()
     }).then((value) => {
-      console.log(value);
-      dispatch(returnSongs(value.data));
+      const normalizedSongs = normalize(value, {
+        data: arrayOf(songSchema)
+      });
+      dispatch(returnSongs(normalizedSongs));
     });
 
   }

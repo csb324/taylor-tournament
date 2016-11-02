@@ -9,7 +9,7 @@
     "dev": "NODE_ENV=development npm start",
     "start": "node devServer.js",
     "lint": "eslint src",
-    "db": "node src/database/seed.js"
+    "db": "node server/database/seed.js"
   },
   "license": "MIT",
   "devDependencies": {
@@ -45,6 +45,7 @@
     "babel-register": "^6.18.0",
     "bluebird": "^3.4.6",
     "immutable": "^3.8.1",
+    "lodash": "^4.16.6",
     "node-fetch": "^1.6.3",
     "normalizr": "^2.2.1",
     "pg": "^6.1.0",
@@ -52,6 +53,8 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.1.1",
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.6",
     "redux-requests": "^1.0.2",
     "redux-thunk": "^1.0.3",
     "sequelize": "^3.24.6"

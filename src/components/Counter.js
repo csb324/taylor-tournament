@@ -5,6 +5,10 @@ export default class Counter extends Component {
     super(props, context);
   }
 
+  handleCreateGame() {
+    this.props.actions.createGame();
+  }
+
   handleIncrement() {
     this.props.actions.increment();
   }
@@ -31,6 +35,7 @@ export default class Counter extends Component {
           <button onClick={() => {this.handleIncrement();}}>+</button>
           
           <button onClick={() => {this.handleRequest();}}>etc</button>
+          <button onClick={() => {this.handleCreateGame();}}>new game</button>
           
         </div>
       </div>
