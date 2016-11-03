@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import SongsPage from './containers/SongsPage';
 
@@ -7,5 +7,5 @@ import SongsPage from './containers/SongsPage';
 // import RepoPage from './containers/RepoPage'
 
 export default <Route path="/" component={App}>
-	<Route path="/songs" component={SongsPage} />
+	<IndexRoute component={SongsPage} />
 </Route>

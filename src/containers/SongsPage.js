@@ -27,7 +27,7 @@ class SongsPage extends Component {
 
     return (
       <div>
-        <h1>hi!</h1>
+
         { this.props.selectedSongs.map((songID) => {
           return this.renderSong(this.props.songs[songID]);
         })}
