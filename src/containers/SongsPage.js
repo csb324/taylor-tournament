@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { getSongs } from '../actions/SongsActions';
+import * as songActions from '../actions/SongsActions';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Song from '../components/Song';
+
 
 const loadData = (props) => {
   props.getSongs();
@@ -12,26 +15,17 @@ class SongsPage extends Component {
     loadData(this.props);
   }
 
-  renderSong(song) {
-    return (
-      <div key={song.id}> 
-        <h3>{song.name}</h3>
-      </div>
-    )
-  }
-
   render() {
-    const { songs } = this.props;
-
     console.log(this.props);
+    const { songs, selectedSongs } = this.props;
+    const renderedSongs = selectedSongs.map((songID) => {
+      let song = songs[songID];
+      return <Song key={song.id} song={song} />;
+    })
 
     return (
       <div>
-
-        { this.props.selectedSongs.map((songID) => {
-          return this.renderSong(this.props.songs[songID]);
-        })}
-
+        { renderedSongs }
       </div>
     )
   }
@@ -43,7 +37,8 @@ SongsPage.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { entities: { songs }, selectedSongs } = state;
+  const songs = state.entities.songs;
+  const selectedSongs = state.selectedSongs
 
   return {
     songs,
@@ -51,6 +46,11 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, {
-  getSongs
-})(SongsPage)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(songActions, dispatch)
+};
+
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(SongsPage)

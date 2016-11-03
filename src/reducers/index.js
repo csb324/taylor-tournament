@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 import counter from './counter';
-import songs from './songs';
 import selectedSongs from './selectedSongs';
-
+import entities from './entities';
 import { routerReducer as routing } from 'react-router-redux'
 /**
  * combineReducers is important to understand. As your app might grow in size
@@ -18,18 +17,8 @@ import { routerReducer as routing } from 'react-router-redux'
  * More info: http://rackt.org/redux/docs/api/combineReducers.html
  */
 
-import merge from 'lodash/merge'
-
-const entities = function(state = { songs: {} }, action) {
-	if (action.response && action.response.entities) {
-		return merge({}, state, action.response.entities);
-	}
-	return state;
-}
-
 
 const rootReducer = combineReducers({
-  counter, // you might be used to: counter: counter,
 	entities,
   selectedSongs,
   routing

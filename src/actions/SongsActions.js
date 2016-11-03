@@ -1,10 +1,7 @@
-import { GET_SONGS } from '../constants/ActionTypes';
+import { GET_SONGS, GET_SONGS_SUCCESS } from '../constants/ActionTypes';
 import { Schema, arrayOf, normalize } from 'normalizr';
 
-
 const songSchema = new Schema('songs');
-
-
 
 export function returnSongs(response) {
   return {
@@ -18,12 +15,14 @@ export function getSongs() {
 
     const url = "/api/songs";
 
-    fetch(url).then(function(response) { 
+    return fetch(url).then(function(response) { 
       return response.json()
     }).then((value) => {
+
       const normalizedSongs = normalize(value, {
         data: arrayOf(songSchema)
-      });
+      });      
+
       dispatch(returnSongs(normalizedSongs));
     });
 

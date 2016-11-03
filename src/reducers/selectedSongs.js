@@ -1,8 +1,8 @@
 import { GET_SONGS } from '../constants/ActionTypes';
 
-const initialState = [];
+const initialSelectedSongs = [];
 
-export default function selectedSongs(state = initialState, action) {
+export default function selectedSongs(state = initialSelectedSongs, action) {
   switch (action.type) {
 
   case GET_SONGS:
