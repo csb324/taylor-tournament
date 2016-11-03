@@ -15,6 +15,12 @@ class SongsPage extends Component {
     loadData(this.props);
   }
 
+  handleComplete() {
+    return () => {
+      this.props.submitSongs(this.props.selectedSongs);
+    }
+  }
+
   render() {
     console.log(this.props);
     const { songs, selectedSongs } = this.props;
@@ -25,7 +31,9 @@ class SongsPage extends Component {
 
     return (
       <div>
-        { renderedSongs }
+
+        <button onClick={this.handleComplete()}>click here</button>
+        { renderedSongs }        
       </div>
     )
   }
