@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Game.belongsToMany(models.Song, { through: 'GameSongs' });
         Game.belongsTo(models.Song, { as: 'winner' } );
+        Game.belongsTo(models.Round);
       }
     }
   });

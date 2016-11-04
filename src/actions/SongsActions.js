@@ -31,17 +31,23 @@ export function getSongs() {
 }
 
 export function submitSongs(selectedSongs) {
-  const url = "/api/tournament";
-  const body = {
-    songs: selectedSongs
+  const url = "/api/tournaments";
+  const options = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      songs: selectedSongs
+    })
   };
+
+  console.log(options);
 
   return (dispatch) => {
 
-    return fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(body)
-    }).then((response) => {
+    return fetch(url, options).then((response) => {
       return response.json()
 
     }).then((value) => {

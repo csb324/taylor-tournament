@@ -4,6 +4,7 @@ import merge from 'lodash/merge'
 const initialEntities = {
 	songs: {},
 	rounds: {},
+	tournaments: {},
 	games: {}
 }
 

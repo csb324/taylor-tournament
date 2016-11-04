@@ -5,6 +5,8 @@ import express from 'express';
 import models from './models';
 import buildController from './controllers/genericController';
 
+import specialController from './controllers/tournamentController';
+
 const songController = buildController(models.Song, "song");
 const gameController = buildController(models.Game, "game");
 
@@ -20,7 +22,12 @@ router.post('/songs', songController.create);
 
 router.get('/games', gameController.index);
 router.get('/games/:id', gameController.show);
-
 router.post('/games', gameController.create);
+
+// router.post('/newGame', specialController.sandbox)
+
+router.post('/tournaments', specialController.create);
+router.get('/tournaments', specialController.index);
+
 
 export default router;

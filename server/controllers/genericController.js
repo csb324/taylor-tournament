@@ -1,6 +1,5 @@
 export default function buildController(model, modelName) {
 
-
 	let controller = {
 
 		index: function(req, res, next) {

@@ -11,6 +11,9 @@ const compiler = webpack(config);
 const models = require('./server/models');
 const api = require('./server/routes').default;
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // for parsing application/json
+
 app.use('/api', api);
 
 app.use(require('webpack-dev-middleware')(compiler, {
